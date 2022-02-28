@@ -23,7 +23,7 @@ class Mediator
      */
     public function __construct()
     {
-        $this->telegram = new TelegramApi('5290981624:AAGST2ElmxOEcSFnMssQMw7x_0Zu8Fkw0iw');
+        $this->telegram = new TelegramApi('');
     }
 
     /**
