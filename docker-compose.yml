@@ -1,0 +1,31 @@
+version: '2'
+services:
+  db:
+    image: mysql:8.0
+    volumes:
+      - ./docker/mysql/conf.d:/etc/mysql/mysql.conf.d:cached
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d:cached
+    environment:
+      MYSQL_ROOT_PASSWORD: app
+      MYSQL_DATABASE: app
+    ports:
+      - "3320:3306" #по какому внешнего порту доступен сервис
+
+  backend:
+    build: ./docker/php
+    volumes:
+      - ~/.composer-docker/cache:/root/.composer/cache:cached
+      - ./:/app:delegated
+    links:
+      - db
+
+  app:
+    build: ./docker/nginx
+    tty: true
+    ports:
+      - "8090:80"
+    volumes:
+      - ./:/app:delegated
+      - ./docker/nginx/config/conf.d:/etc/nginx/conf.d
+    links:
+      - app-backend
