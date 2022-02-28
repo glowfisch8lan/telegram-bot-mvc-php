@@ -26,7 +26,7 @@
 <p>
 A universal source for Telegram bots has been written.
 I'll post the documentation later.
-next:
+
 1. Called in the controller, for example, App::run();
 https://github.com/glowfisch8lan/telegram-bot-mvc-php/blob/main/app/Http/Controllers/TelegramController.php
 
